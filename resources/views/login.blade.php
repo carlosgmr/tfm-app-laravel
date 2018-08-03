@@ -56,8 +56,8 @@
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="name"><span class="glyphicon glyphicon-envelope"></span> Email</label>
-                        <input type="email" name="email" id="name" class="form-control">
+                        <label for="email"><span class="glyphicon glyphicon-envelope"></span> Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
                     </div>
                     <div class="form-group">
                         <label for="password"><span class="glyphicon glyphicon-lock"></span> Contraseña</label>
@@ -67,9 +67,9 @@
                         <label for="role"><span class="glyphicon glyphicon-user"></span> Tipo de cuenta</label>
                         <select name="role" id="role" class="form-control">
                             <option value=""></option>
-                            <option value="user">Usuario</option>
-                            <option value="instructor">Instructor</option>
-                            <option value="administrator">Administrador</option>
+                            <option value="user"@if (old('role') === 'user') selected @endif>Usuario</option>
+                            <option value="instructor"@if (old('role') === 'instructor') selected @endif>Instructor</option>
+                            <option value="administrator"@if (old('role') === 'administrator') selected @endif>Administrador</option>
                         </select>
                     </div>
                     <div class="row">

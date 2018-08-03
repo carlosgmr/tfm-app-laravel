@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use GuzzleHttp\Client;
+use App\Library\Api\AuthService;
 
 class LoginController extends Controller
 {
@@ -15,35 +15,25 @@ class LoginController extends Controller
 
     public function post(Request $request)
     {
-        $validatedData = $request->validate([
+        $data = $request->validate([
             'email' => 'required',
             'password' => 'required',
             'role' => 'required',
         ]);
 
-        $client = new Client();
-        $response = $client->request('POST', env('API_URL').'auth/login', [
-            'http_errors' => false,
-            'headers' => [
-                'Content-Type' => 'application/json',
-            ],
-            'body' => json_encode($validatedData),
-        ]);
-
+        $authService = new AuthService();
+        $serviceResponse = $authService->login($data);
         $apiErrors = [];
-        if ($response->getStatusCode() === 200) {
-            // guardar datos en sesión
+
+        if ($serviceResponse->isOk()) {
+            session(['appUser' => $serviceResponse->getData()]);
+            return redirect()->route('administrator.home');
         } else {
-            $content = json_decode($response->getBody()->getContents(), true);
-            foreach ($content as $row) {
-                foreach ($row as $error) {
-                    $apiErrors[] = $error;
-                }
-            }
+            $apiErrors = $serviceResponse->getListErrors();
         }
 
-        return view('login', [
-            'apiErrors' => $apiErrors,
-        ]);
+        return redirect()->route('login')
+                ->withInput($request->except('password'))
+                ->withErrors($apiErrors);
     }
 }
