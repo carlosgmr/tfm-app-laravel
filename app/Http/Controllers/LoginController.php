@@ -26,7 +26,10 @@ class LoginController extends Controller
         $apiErrors = [];
 
         if ($serviceResponse->isOk()) {
-            session(['appUser' => $serviceResponse->getData()]);
+            $responseData = $serviceResponse->getData();
+            session(['appUser' => $responseData['user']]);
+            session(['token' => $responseData['token']]);
+
             return redirect()->route('administrator.home');
         } else {
             $apiErrors = $serviceResponse->getListErrors();
