@@ -2,48 +2,39 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CrudController;
 
-class InstructorController extends Controller
+class InstructorController extends CrudController
 {
-    public function listing(Request $request)
+    public function __construct()
     {
-        return view('administrator.home');
+        $this->serviceClass = \App\Library\Api\InstructorService::class;
+        $this->panel = 'administrator';
+        $this->module = 'instructor';
+        $this->rulesForCreate = [
+            'email' => 'required',
+            'password' => 'required',
+            'name' => 'required',
+            'surname_1' => 'required',
+            'surname_2' => 'nullable',
+            'active' => 'required',
+        ];
+        $this->rulesForUpdate = [
+            'email' => 'required',
+            'password' => 'nullable',
+            'name' => 'required',
+            'surname_1' => 'required',
+            'surname_2' => 'nullable',
+            'active' => 'required',
+        ];
     }
 
-    public function read(Request $request, $id)
+    public function formatUpdateData($data)
     {
-        return view('administrator.home');
-    }
+        if (empty($data['password'])) {
+            unset($data['password']);
+        }
 
-    public function createView(Request $request)
-    {
-        return view('administrator.home');
-    }
-
-    public function createProcess(Request $request)
-    {
-        return view('administrator.home');
-    }
-
-    public function updateView(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function updateProcess(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function deleteView(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function deleteProcess(Request $request, $id)
-    {
-        return view('administrator.home');
+        return $data;
     }
 }

@@ -96,3 +96,16 @@ if (!function_exists('urlHome')) {
         return $route;
     }
 }
+
+if (!function_exists('getModule')) {
+    /**
+     * Devuelve el nombre del módulo para la ruta actual
+     * @return string|null
+     */
+    function getModule()
+    {
+        $routeName = request()->route()->getName();
+        $routeArray = explode('.', $routeName);
+        return $routeArray[1] ?? null;
+    }
+}

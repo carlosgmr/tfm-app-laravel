@@ -2,48 +2,24 @@
 
 namespace App\Http\Controllers\Administrator;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Controllers\CrudController;
 
-class GroupController extends Controller
+class GroupController extends CrudController
 {
-    public function listing(Request $request)
+    public function __construct()
     {
-        return view('administrator.home');
-    }
-
-    public function read(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function createView(Request $request)
-    {
-        return view('administrator.home');
-    }
-
-    public function createProcess(Request $request)
-    {
-        return view('administrator.home');
-    }
-
-    public function updateView(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function updateProcess(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function deleteView(Request $request, $id)
-    {
-        return view('administrator.home');
-    }
-
-    public function deleteProcess(Request $request, $id)
-    {
-        return view('administrator.home');
+        $this->serviceClass = \App\Library\Api\GroupService::class;
+        $this->panel = 'administrator';
+        $this->module = 'group';
+        $this->rulesForCreate = [
+            'name' => 'required',
+            'description' => 'nullable',
+            'active' => 'required',
+        ];
+        $this->rulesForUpdate = [
+            'name' => 'required',
+            'description' => 'nullable',
+            'active' => 'required',
+        ];
     }
 }

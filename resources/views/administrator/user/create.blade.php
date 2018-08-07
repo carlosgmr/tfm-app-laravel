@@ -1,14 +1,14 @@
 @extends('layout')
-@section('title', 'Crear administrador')
+@section('title', 'Crear usuario')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.administrator.listing') }}">
+<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.user.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection
 
 @section('content')
-<form id="formCreate" action="{{ route('administrator.administrator.createProcess') }}" method="post">
+<form id="formCreate" action="{{ route('administrator.user.createProcess') }}" method="post">
     @csrf
     <div class="form-group">
         <label for="email">Email</label>

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Detalle de administrador')
+@section('title', 'Eliminar administrador')
 
 @section('tools')
 <a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.administrator.listing') }}">
@@ -33,8 +33,8 @@
 @endsection
 
 @section('footer')
-<div>
-    <a class="btn btn-primary" href="{{ route('administrator.administrator.updateView', ['id' => $id]) }}" title="Modificar">Modificar</a> 
-    <a class="btn btn-danger" href="{{ route('administrator.administrator.deleteView', ['id' => $id]) }}" title="Eliminar">Eliminar</a>
-</div>
+<form action="{{ route('administrator.administrator.deleteProcess', ['id' => $id]) }}" method="post">
+    @csrf
+    <button type="submit" class="btn btn-danger" title="Confirmar borrado">Confirmar borrado</button>
+</form>
 @endsection

@@ -7,11 +7,11 @@ namespace App\Library\Api;
  *
  * @author carlos
  */
-class AdministratorService extends BaseService
+class InstructorService extends BaseService
 {
     public function __construct()
     {
         parent::__construct();
-        $this->resource = 'administrator';
+        $this->resource = 'instructor';
     }
 }

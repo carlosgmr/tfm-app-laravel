@@ -94,12 +94,29 @@
                 <section class="sidebar">
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu" data-widget="tree">
+                        @php $module = getModule() @endphp
                         @switch(appUser('role'))
                             @case('administrator')
-                                <li><a href="{{ route('administrator.administrator.listing') }}"><i class="fa fa-circle-o"></i> <span>Administradores</span></a></li>
-                                <li><a href="{{ route('administrator.instructor.listing') }}"><i class="fa fa-circle-o"></i> <span>Instructores</span></a></li>
-                                <li><a href="{{ route('administrator.user.listing') }}"><i class="fa fa-circle-o"></i> <span>Usuarios</span></a></li>
-                                <li><a href="{{ route('administrator.group.listing') }}"><i class="fa fa-circle-o"></i> <span>Grupos</span></a></li>
+                                <li @if ($module === 'administrator') class="active" @endif>
+                                    <a href="{{ route('administrator.administrator.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Administradores</span>
+                                    </a>
+                                </li>
+                                <li @if ($module === 'instructor') class="active" @endif>
+                                    <a href="{{ route('administrator.instructor.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Instructores</span>
+                                    </a>
+                                </li>
+                                <li @if ($module === 'user') class="active" @endif>
+                                    <a href="{{ route('administrator.user.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Usuarios</span>
+                                    </a>
+                                </li>
+                                <li @if ($module === 'group') class="active" @endif>
+                                    <a href="{{ route('administrator.group.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Grupos</span>
+                                    </a>
+                                </li>
                             @break
                             
                             @case('instructor')
