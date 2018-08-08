@@ -19,6 +19,9 @@ Route::get('/login', 'LoginController@get')->name('login');
 Route::post('/login', 'LoginController@post')->name('login.proccess');
 Route::get('/logout', 'LogoutController@get')->name('logout');
 
+/**
+ * Panel administrador
+ */
 Route::get('/administrator', 'Administrator\HomeController@index')->name('administrator.home');
 
 Route::get('/administrator/administrator', 'Administrator\AdministratorController@listing')->name('administrator.administrator.listing');
@@ -38,6 +41,8 @@ Route::get('/administrator/instructor/{id}/update', 'Administrator\InstructorCon
 Route::post('/administrator/instructor/{id}/update', 'Administrator\InstructorController@updateProcess')->name('administrator.instructor.updateProcess')->where('id', '[1-9][0-9]*');
 Route::get('/administrator/instructor/{id}/delete', 'Administrator\InstructorController@deleteView')->name('administrator.instructor.deleteView')->where('id', '[1-9][0-9]*');
 Route::post('/administrator/instructor/{id}/delete', 'Administrator\InstructorController@deleteProcess')->name('administrator.instructor.deleteProcess')->where('id', '[1-9][0-9]*');
+Route::get('/administrator/instructor/{id}/group', 'Administrator\InstructorController@groupView')->name('administrator.instructor.groupView')->where('id', '[1-9][0-9]*');
+Route::post('/administrator/instructor/{id}/group', 'Administrator\InstructorController@groupProcess')->name('administrator.instructor.groupProcess')->where('id', '[1-9][0-9]*');
 
 Route::get('/administrator/user', 'Administrator\UserController@listing')->name('administrator.user.listing');
 Route::get('/administrator/user/{id}', 'Administrator\UserController@read')->name('administrator.user.read')->where('id', '[1-9][0-9]*');
@@ -47,6 +52,8 @@ Route::get('/administrator/user/{id}/update', 'Administrator\UserController@upda
 Route::post('/administrator/user/{id}/update', 'Administrator\UserController@updateProcess')->name('administrator.user.updateProcess')->where('id', '[1-9][0-9]*');
 Route::get('/administrator/user/{id}/delete', 'Administrator\UserController@deleteView')->name('administrator.user.deleteView')->where('id', '[1-9][0-9]*');
 Route::post('/administrator/user/{id}/delete', 'Administrator\UserController@deleteProcess')->name('administrator.user.deleteProcess')->where('id', '[1-9][0-9]*');
+Route::get('/administrator/user/{id}/group', 'Administrator\UserController@groupView')->name('administrator.user.groupView')->where('id', '[1-9][0-9]*');
+Route::post('/administrator/user/{id}/group', 'Administrator\UserController@groupProcess')->name('administrator.user.groupProcess')->where('id', '[1-9][0-9]*');
 
 Route::get('/administrator/group', 'Administrator\GroupController@listing')->name('administrator.group.listing');
 Route::get('/administrator/group/{id}', 'Administrator\GroupController@read')->name('administrator.group.read')->where('id', '[1-9][0-9]*');
@@ -56,3 +63,16 @@ Route::get('/administrator/group/{id}/update', 'Administrator\GroupController@up
 Route::post('/administrator/group/{id}/update', 'Administrator\GroupController@updateProcess')->name('administrator.group.updateProcess')->where('id', '[1-9][0-9]*');
 Route::get('/administrator/group/{id}/delete', 'Administrator\GroupController@deleteView')->name('administrator.group.deleteView')->where('id', '[1-9][0-9]*');
 Route::post('/administrator/group/{id}/delete', 'Administrator\GroupController@deleteProcess')->name('administrator.group.deleteProcess')->where('id', '[1-9][0-9]*');
+Route::get('/administrator/group/{id}/instructor', 'Administrator\GroupController@instructorView')->name('administrator.group.instructorView')->where('id', '[1-9][0-9]*');
+Route::post('/administrator/group/{id}/instructor', 'Administrator\GroupController@instructorProcess')->name('administrator.group.instructorProcess')->where('id', '[1-9][0-9]*');
+Route::get('/administrator/group/{id}/user', 'Administrator\GroupController@userView')->name('administrator.group.userView')->where('id', '[1-9][0-9]*');
+Route::post('/administrator/group/{id}/user', 'Administrator\GroupController@userProcess')->name('administrator.group.userProcess')->where('id', '[1-9][0-9]*');
+
+/**
+ * Panel instructor
+ */
+
+
+/**
+ * Panel usuario
+ */

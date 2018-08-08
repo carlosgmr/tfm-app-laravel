@@ -26,6 +26,12 @@
             <dd>{{ esDatetime($item['updated_at']) }}</dd>
             <dt>Activo</dt>
             <dd>{{ strBool($item['active']) }}</dd>
+            <dt>Grupos a los que pertenece</dt>
+            <dd>
+                @foreach ($groups as $group)
+                    <a href="{{ route('administrator.group.read', ['id' => $group['id']]) }}">{{ $group['name'] }}</a><br/>
+                @endforeach
+            </dd>
         </dl>
     @else
         No existen datos
@@ -35,6 +41,7 @@
 @section('footer')
 <div>
     <a class="btn btn-primary" href="{{ route('administrator.user.updateView', ['id' => $id]) }}" title="Modificar">Modificar</a> 
+    <a class="btn btn-success" href="{{ route('administrator.user.groupView', ['id' => $id]) }}" title="Inscribir en grupos">Inscribir en grupos</a> 
     <a class="btn btn-danger" href="{{ route('administrator.user.deleteView', ['id' => $id]) }}" title="Eliminar">Eliminar</a>
 </div>
 @endsection
