@@ -27,10 +27,11 @@ class LoginController extends Controller
 
         if ($serviceResponse->isOk()) {
             $responseData = $serviceResponse->getData();
+            $role = $responseData['user']['role'];
             session(['appUser' => $responseData['user']]);
             session(['token' => $responseData['token']]);
 
-            return redirect()->route('administrator.home');
+            return redirect()->route($role.'.home');
         } else {
             $apiErrors = $serviceResponse->getListErrors();
         }

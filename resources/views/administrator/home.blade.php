@@ -2,7 +2,7 @@
 @section('title', 'Panel de administrador')
 
 @section('content')
-    <p>Bienvenido al panel de administración. Selecciona una opción:</p>
+    <p>Bienvenido al panel de administrador. Selecciona una opción:</p>
     <p>
         <a href="{{ route('administrator.administrator.listing') }}" class="btn btn-default btn-block" style="text-align:left">Administradores</a>
         <a href="{{ route('administrator.instructor.listing') }}" class="btn btn-default btn-block" style="text-align:left">Instructores</a>

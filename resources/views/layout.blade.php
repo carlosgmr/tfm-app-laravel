@@ -122,7 +122,11 @@
                             @break
                             
                             @case('instructor')
-                                
+                                <li @if ($module === 'group') class="active" @endif>
+                                    <a href="{{ route('instructor.group.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Grupos</span>
+                                    </a>
+                                </li>
                             @break
 
                             @case('user')
