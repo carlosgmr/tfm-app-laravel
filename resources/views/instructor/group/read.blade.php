@@ -70,6 +70,6 @@
 
 @section('footer')
 <div>
-    <a class="btn btn-primary" href="" title="Crear examen">Crear examen</a> 
+    <a class="btn btn-primary" href="{{ route('instructor.questionary.createView') }}" title="Crear examen">Crear examen</a> 
 </div>
 @endsection

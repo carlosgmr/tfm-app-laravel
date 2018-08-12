@@ -44,4 +44,19 @@ class UserService extends BaseService
 
         return new ServiceResponse($response);
     }
+
+    /**
+     * Obtiene el listado de los exámenes/encuestas realizados por el usuario, ordenado por grupo
+     * al que pertenece el examen/encuesta
+     * @param string|int $id
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function questionnairesMade($id)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $response = $client->request('GET', $this->url.$this->resource.'/'.$id.'/group/questionary', $options);
+
+        return new ServiceResponse($response);
+    }
 }

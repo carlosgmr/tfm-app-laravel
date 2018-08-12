@@ -77,9 +77,13 @@ Route::get('/instructor/group', 'Instructor\GroupController@listing')->name('ins
 Route::get('/instructor/group/{id}', 'Instructor\GroupController@read')->name('instructor.group.read')->where('id', '[1-9][0-9]*');
 
 Route::get('/instructor/instructor/{id}', 'Instructor\InstructorController@read')->name('instructor.instructor.read')->where('id', '[1-9][0-9]*');
+
 Route::get('/instructor/user/{id}', 'Instructor\UserController@read')->name('instructor.user.read')->where('id', '[1-9][0-9]*');
+Route::get('/instructor/user/{idUser}/questionary/{idQuestionary}', 'Instructor\UserController@questionaryDetails')->name('instructor.user.questionaryDetails')->where('idUser', '[1-9][0-9]*')->where('idQuestionary', '[1-9][0-9]*');
 
 Route::get('/instructor/questionary/{id}', 'Instructor\QuestionaryController@read')->name('instructor.questionary.read')->where('id', '[1-9][0-9]*');
+Route::get('/instructor/questionary/create', 'Instructor\QuestionaryController@createView')->name('instructor.questionary.createView');
+Route::post('/instructor/questionary/create', 'Instructor\QuestionaryController@createProcess')->name('instructor.questionary.createProcess');
 
 /**
  * Panel usuario
