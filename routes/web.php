@@ -87,6 +87,10 @@ Route::get('/instructor/questionary/create', 'Instructor\QuestionaryController@c
 Route::post('/instructor/questionary/create', 'Instructor\QuestionaryController@createProcess')->name('instructor.questionary.createProcess');
 Route::get('/instructor/questionary/{id}/update', 'Instructor\QuestionaryController@updateView')->name('instructor.questionary.updateView')->where('id', '[1-9][0-9]*');
 Route::post('/instructor/questionary/{id}/update', 'Instructor\QuestionaryController@updateProcess')->name('instructor.questionary.updateProcess')->where('id', '[1-9][0-9]*');
+Route::get('/instructor/questionary/{id}/delete', 'Instructor\QuestionaryController@deleteView')->name('instructor.questionary.deleteView')->where('id', '[1-9][0-9]*');
+Route::post('/instructor/questionary/{id}/delete', 'Instructor\QuestionaryController@deleteProcess')->name('instructor.questionary.deleteProcess')->where('id', '[1-9][0-9]*');
+Route::get('/instructor/questionary/{id}/update/questions', 'Instructor\QuestionaryController@updateQuestionsView')->name('instructor.questionary.updateQuestionsView')->where('id', '[1-9][0-9]*');
+Route::post('/instructor/questionary/{id}/update/questions', 'Instructor\QuestionaryController@updateQuestionsProcess')->name('instructor.questionary.updateQuestionsProcess')->where('id', '[1-9][0-9]*');
 
 /**
  * Panel usuario

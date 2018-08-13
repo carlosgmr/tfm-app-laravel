@@ -209,7 +209,7 @@
                 <div class="pull-right hidden-xs">
                     <b>Version</b> {{ env('APP_VERSION') }}
                 </div>
-                <strong>Copyright &copy; {{ date('Y') }} <a href="{{ env('APP_COPYRIGHT_URL') }}">{{ env('APP_COPYRIGHT') }}</a>.</strong>
+                <strong>Copyright &copy; {{ date('Y') }} <a href="{{ env('APP_COPYRIGHT_URL') }}" target="_blank">{{ env('APP_COPYRIGHT') }}</a>.</strong>
             </footer>
         </div>
         <!-- ./wrapper -->

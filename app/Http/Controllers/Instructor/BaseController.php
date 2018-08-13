@@ -49,16 +49,48 @@ class BaseController extends Controller
     }
 
     /**
+     * Devuelve los detalles de un grupo
+     * @return array|null
+     */
+    protected function getGroup($id)
+    {
+        $result = null;
+        $service = new \App\Library\Api\GroupService();
+        $response = $service->read($id);
+        if ($response->isOk()) {
+            $result = $response->getData();
+        }
+
+        return $result;
+    }
+
+    /**
      * Retorna el listado de los modelos de examen disponibles
      * @return array|null
      */
-    protected function getModels()
+    protected function getQuestionaryModels()
     {
         $result = null;
         $questionaryModelService = new \App\Library\Api\QuestionaryModelService();
         $responseListingModel = $questionaryModelService->listing();
         if ($responseListingModel->isOk()) {
             $result = $responseListingModel->getData();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Devuelve los detalles de un modelo de examen
+     * @return array|null
+     */
+    protected function getQuestionaryModel($id)
+    {
+        $result = null;
+        $service = new \App\Library\Api\QuestionaryModelService();
+        $response = $service->read($id);
+        if ($response->isOk()) {
+            $result = $response->getData();
         }
 
         return $result;

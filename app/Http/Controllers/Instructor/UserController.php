@@ -70,7 +70,7 @@ class UserController extends BaseController
     }
 
     /**
-     * Operación básica de lectura
+     * Obtiene el registro de respuestas para un usuario y examen concretos
      * @param Request $request
      * @param string|int $idUser
      * @param string|int $idQuestionary
@@ -78,6 +78,11 @@ class UserController extends BaseController
      */
     public function questionaryDetails(Request $request, $idUser, $idQuestionary)
     {
-        
+        $data = [
+            'idUser' => $idUser,
+            'idQuestionary' => $idQuestionary,
+        ];
+
+        return view($this->panel.'.'.$this->module.'.questionaryDetails', $data);
     }
 }

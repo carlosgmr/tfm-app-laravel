@@ -45,10 +45,13 @@
                             <a class="btn btn-xs btn-warning" title="Ver detalles" href="{{ route('instructor.questionary.read', ['id' => $item['id']]) }}">
                                 <i class="fa fa-eye"></i>
                             </a>
-                            <a class="btn btn-xs btn-success" title="Editar" href="{{ route('instructor.questionary.updateView', ['id' => $item['id']]) }}">
+                            <a class="btn btn-xs btn-success" title="Modificar examen/encuesta" href="{{ route('instructor.questionary.updateView', ['id' => $item['id']]) }}">
                                 <i class="fa fa-pencil"></i>
                             </a>
-                            <a class="btn btn-xs btn-danger" title="Eliminar" href="{*{ route('instructor.questionary.deleteView', ['id' => $item['id']]) }*}">
+                            <a class="btn btn-xs btn-info" title="Modificar preguntas y respuestas" href="{{ route('instructor.questionary.updateQuestionsView', ['id' => $item['id']]) }}">
+                                <i class="fa fa-check-square-o"></i>
+                            </a>
+                            <a class="btn btn-xs btn-danger" title="Eliminar" href="{{ route('instructor.questionary.deleteView', ['id' => $item['id']]) }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>

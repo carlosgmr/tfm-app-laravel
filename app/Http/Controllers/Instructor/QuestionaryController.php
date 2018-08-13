@@ -45,26 +45,18 @@ class QuestionaryController extends BaseController
     {
         $data = [
             'item' => null,
-            //'groups' => [],
             'apiErrors' => [],
             'id' => $id,
         ];
 
         $service = new \App\Library\Api\QuestionaryService();
 
-        $responseRead = $service->read($id);
+        $responseRead = $service->readComplete($id);
         if ($responseRead->isOk()) {
             $data['item'] = $responseRead->getData();
         } else {
             $data['apiErrors'] = $responseRead->getListErrors();
         }
-
-        /*$responseListingGroup = $service->listingGroup($id);
-        if ($responseListingGroup->isOk()) {
-            $data['groups'] = $responseListingGroup->getData();
-        } else {
-            $data['apiErrors'] = array_merge($data['apiErrors'], $responseListingGroup->getListErrors());
-        }*/
 
         return view($this->panel.'.'.$this->module.'.read', $data);
     }
@@ -89,7 +81,7 @@ class QuestionaryController extends BaseController
             $data['apiErrors'][] = 'No se ha podido cargar los grupos disponibles';
         }
 
-        $models = $this->getModels();
+        $models = $this->getQuestionaryModels();
         if (is_array($models)) {
             $data['models'] = $models;
         } else {
@@ -185,5 +177,101 @@ class QuestionaryController extends BaseController
         return redirect()->route($this->panel.'.'.$this->module.'.updateView', ['id' => $id])
                 ->withInput($request->input())
                 ->withErrors($apiErrors);
+    }
+
+    /**
+     * Operación básica de eliminación (vista)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function deleteView(Request $request, $id)
+    {
+        $data = [
+            'item' => null,
+            'group' => null,
+            'model' => null,
+            'apiErrors' => [],
+            'id' => $id,
+        ];
+
+        $service = new \App\Library\Api\QuestionaryService();
+
+        $responseRead = $service->read($id);
+        if ($responseRead->isOk()) {
+            $data['item'] = $responseRead->getData();
+            $data['group'] = $this->getGroup($data['item']['group']);
+            $data['model'] = $this->getQuestionaryModel($data['item']['model']);
+        } else {
+            $data['apiErrors'] = $responseRead->getListErrors();
+        }
+
+        return view($this->panel.'.'.$this->module.'.delete', $data);
+    }
+
+    /**
+     * Operación básica de eliminación (proceso)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function deleteProcess(Request $request, $id)
+    {
+        $service = new \App\Library\Api\QuestionaryService();
+        $serviceResponse = $service->delete($id);
+
+        if ($serviceResponse->isOk()) {
+            return redirect()->route($this->panel.'.'.$this->module.'.listing')
+                    ->with('flashMessage', 'Registro eliminado correctamente')
+                    ->with('flashType', 'success');
+        } else {
+            $apiErrors = $serviceResponse->getListErrors();
+        }
+
+        return redirect()->route($this->panel.'.'.$this->module.'.deleteView', ['id' => $id])
+                ->withErrors($apiErrors);
+    }
+
+    /**
+     * Operación para actualizar las preguntas y respuestas de un 
+     * examen/encuesta (vista)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function updateQuestionsView(Request $request, $id)
+    {
+        $data = [
+            'apiErrors' => [],
+            'id' => $id,
+        ];
+
+        return view($this->panel.'.'.$this->module.'.updateQuestions', $data);
+    }
+
+    /**
+     * Operación para actualizar las preguntas y respuestas de un 
+     * examen/encuesta (proceso)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function updateQuestionsProcess(Request $request, $id)
+    {
+        $data = $request->validate([]);
+        /*$service = new \App\Library\Api\QuestionaryService();
+        $serviceResponse = $service->update($id, $data);
+
+        if ($serviceResponse->isOk()) {
+            return redirect()->route($this->panel.'.'.$this->module.'.read', ['id' => $id])
+                    ->with('flashMessage', 'Registro actualizado correctamente')
+                    ->with('flashType', 'success');
+        } else {
+            $apiErrors = $serviceResponse->getListErrors();
+        }*/
+
+        return redirect()->route($this->panel.'.'.$this->module.'.updateQuestionsView', ['id' => $id])
+                ->withInput($request->input())
+                /*->withErrors($apiErrors)*/;
     }
 }
