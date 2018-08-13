@@ -1,8 +1,8 @@
 @extends('layout')
-@section('title', 'Crear examen')
+@section('title', 'Crear examen/encuesta')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="">
+<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('instructor.questionary.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection

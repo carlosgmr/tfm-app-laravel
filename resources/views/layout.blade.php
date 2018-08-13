@@ -127,6 +127,11 @@
                                         <i class="fa fa-circle-o"></i> <span>Grupos</span>
                                     </a>
                                 </li>
+                                <li @if ($module === 'questionary') class="active" @endif>
+                                    <a href="{{ route('instructor.questionary.listing') }}">
+                                        <i class="fa fa-circle-o"></i> <span>Exámenes/encuestas</span>
+                                    </a>
+                                </li>
                             @break
 
                             @case('user')

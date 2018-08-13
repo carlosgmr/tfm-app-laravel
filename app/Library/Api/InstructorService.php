@@ -44,4 +44,19 @@ class InstructorService extends BaseService
 
         return new ServiceResponse($response);
     }
+
+    /**
+     * Obtiene el listado de los exámenes a los que tiene acceso un instructor
+     * de acuerdo a los grupos en los que está inscrito
+     * @param string|int $id
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function listingQuestionary($id)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $response = $client->request('GET', $this->url.$this->resource.'/'.$id.'/questionary', $options);
+
+        return new ServiceResponse($response);
+    }
 }

@@ -13,6 +13,29 @@ class QuestionaryController extends BaseController
     }
 
     /**
+     * Operación básica de listado
+     * @param Request $request
+     * @return mixed
+     */
+    public function listing(Request $request)
+    {
+        $service = new \App\Library\Api\InstructorService();
+        $serviceResponse = $service->listingQuestionary(appUser('id'));
+        $data = [
+            'items' => [],
+            'apiErrors' => [],
+        ];
+
+        if ($serviceResponse->isOk()) {
+            $data['items'] = $serviceResponse->getData();
+        } else {
+            $data['apiErrors'] = $serviceResponse->getListErrors();
+        }
+
+        return view($this->panel.'.'.$this->module.'.listing', $data);
+    }
+
+    /**
      * Operación básica de lectura
      * @param Request $request
      * @param string|int $id
@@ -59,20 +82,18 @@ class QuestionaryController extends BaseController
             'apiErrors' => [],
         ];
 
-        $instructorService = new \App\Library\Api\InstructorService();
-        $responseListingGroup = $instructorService->listingGroup(appUser('id'));
-        if ($responseListingGroup->isOk()) {
-            $data['groups'] = $responseListingGroup->getData();
+        $groups = $this->getGroups();
+        if (is_array($groups)) {
+            $data['groups'] = $groups;
         } else {
-            $data['apiErrors'] = $responseListingGroup->getListErrors();
+            $data['apiErrors'][] = 'No se ha podido cargar los grupos disponibles';
         }
 
-        $questionaryModelService = new \App\Library\Api\QuestionaryModelService();
-        $responseListingModel = $questionaryModelService->listing();
-        if ($responseListingModel->isOk()) {
-            $data['models'] = $responseListingModel->getData();
+        $models = $this->getModels();
+        if (is_array($models)) {
+            $data['models'] = $models;
         } else {
-            $data['apiErrors'] = array_merge($data['apiErrors'], $responseListingModel->getListErrors());
+            $data['apiErrors'][] = 'No se ha podido cargar los tipos de examen';
         }
 
         return view($this->panel.'.'.$this->module.'.create', $data);
@@ -106,6 +127,62 @@ class QuestionaryController extends BaseController
         }
 
         return redirect()->route($this->panel.'.'.$this->module.'.createView')
+                ->withInput($request->input())
+                ->withErrors($apiErrors);
+    }
+
+    /**
+     * Operación básica de actualización (vista)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function updateView(Request $request, $id)
+    {
+        $data = [
+            'item' => null,
+            'apiErrors' => [],
+            'id' => $id,
+        ];
+
+        $questionaryService = new \App\Library\Api\QuestionaryService();
+        $readResponse = $questionaryService->read($id);
+
+        if ($readResponse->isOk()) {
+            $data['item'] = $readResponse->getData();
+        } else {
+            $data['apiErrors'] = $readResponse->getListErrors();
+        }
+
+        return view($this->panel.'.'.$this->module.'.update', $data);
+    }
+
+    /**
+     * Operación básica de actualización (proceso)
+     * @param Request $request
+     * @param string|int $id
+     * @return mixed
+     */
+    public function updateProcess(Request $request, $id)
+    {
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'nullable',
+            'public' => 'required',
+            'active' => 'required',
+        ]);
+        $service = new \App\Library\Api\QuestionaryService();
+        $serviceResponse = $service->update($id, $data);
+
+        if ($serviceResponse->isOk()) {
+            return redirect()->route($this->panel.'.'.$this->module.'.read', ['id' => $id])
+                    ->with('flashMessage', 'Registro actualizado correctamente')
+                    ->with('flashType', 'success');
+        } else {
+            $apiErrors = $serviceResponse->getListErrors();
+        }
+
+        return redirect()->route($this->panel.'.'.$this->module.'.updateView', ['id' => $id])
                 ->withInput($request->input())
                 ->withErrors($apiErrors);
     }
