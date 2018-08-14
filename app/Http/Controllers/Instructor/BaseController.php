@@ -95,4 +95,20 @@ class BaseController extends Controller
 
         return $result;
     }
+
+    /**
+     * Retorna el listado de los modelos de pregunta disponibles
+     * @return array|null
+     */
+    protected function getQuestionsModels()
+    {
+        $result = null;
+        $questionModelService = new \App\Library\Api\QuestionModelService();
+        $responseListingModel = $questionModelService->listing();
+        if ($responseListingModel->isOk()) {
+            $result = $responseListingModel->getData();
+        }
+
+        return $result;
+    }
 }

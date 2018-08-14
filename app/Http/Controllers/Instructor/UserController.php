@@ -81,7 +81,17 @@ class UserController extends BaseController
         $data = [
             'idUser' => $idUser,
             'idQuestionary' => $idQuestionary,
+            'item' => null,
+            'apiErrors' => [],
         ];
+
+        $service = new \App\Library\Api\UserService();
+        $response = $service->questionaryDetails($idUser, $idQuestionary);
+        if ($response->isOk()) {
+            $data['item'] = $response->getData();
+        } else {
+            $data['apiErrors'] = $response->getListErrors();
+        }
 
         return view($this->panel.'.'.$this->module.'.questionaryDetails', $data);
     }

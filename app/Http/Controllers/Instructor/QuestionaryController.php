@@ -242,8 +242,10 @@ class QuestionaryController extends BaseController
     public function updateQuestionsView(Request $request, $id)
     {
         $data = [
-            'apiErrors' => [],
             'id' => $id,
+            'models' => $this->getQuestionsModels(),
+            'questions' => [],
+            'apiErrors' => [],
         ];
 
         return view($this->panel.'.'.$this->module.'.updateQuestions', $data);
