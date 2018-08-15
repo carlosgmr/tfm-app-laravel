@@ -28,4 +28,20 @@ class QuestionaryService extends BaseService
 
         return new ServiceResponse($response);
     }
+
+    /**
+     * Añade un listado de preguntas y respuestas a un questionary
+     * @param string|int $id
+     * @param string|array $data
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function addQuestions($id, $data)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $options['body'] = is_array($data) ? json_encode($data) : $data;
+        $response = $client->request('POST', $this->url.$this->resource.'/'.$id.'/add-questions', $options);
+
+        return new ServiceResponse($response);
+    }
 }

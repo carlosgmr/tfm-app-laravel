@@ -57,26 +57,27 @@
                     <h4 class="box-title">Preguntas y respuestas</h4>
                 </div>
                 <div class="box-body">
-                    <ol>
-                        @foreach ($item['questions'] as $question)
-                            <li>
-                                <b>{{ $question['statement'] }}</b>
-                                <ol>
-                                    @foreach ($question['answers'] as $answer)
-                                        <li>
-                                            {{ $answer['statement'] }} 
-                                            @if ($answer['correct'])
-                                            <span class="label label-success" title="Respuesta correcta"><i class="fa fa-check"></i></span>
-                                            @endif
-                                        </li>
-                                    @endforeach
-                                </ol>
-                            </li>
-                        @endforeach
-                    </ol>
-                </div>
-                <div class="box-footer">
-                    <a class="btn btn-primary" href="{{ route('instructor.questionary.updateQuestionsView', ['id' => $id]) }}" title="Modificar">Modificar</a> 
+                    @if (empty($item['questions']))
+                        <a class="btn btn-success" href="{{ route('instructor.questionary.updateQuestionsView', ['id' => $id]) }}" title="Modificar">Añadir</a> 
+                    @else
+                        <ol>
+                            @foreach ($item['questions'] as $question)
+                                <li>
+                                    <b><?php echo nl2brV2($question['statement']); ?></b>
+                                    <ol>
+                                        @foreach ($question['answers'] as $answer)
+                                            <li>
+                                                <?php echo nl2brV2($answer['statement']); ?> 
+                                                @if ($answer['correct'])
+                                                <span class="label label-success" title="Respuesta correcta"><i class="fa fa-check"></i></span>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                    </ol>
+                                </li>
+                            @endforeach
+                        </ol>
+                    @endif
                 </div>
             </div>
         </div>

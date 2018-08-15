@@ -109,3 +109,14 @@ if (!function_exists('getModule')) {
         return $routeArray[1] ?? null;
     }
 }
+
+if (!function_exists('nl2brV2')) {
+    /**
+     * Devuelve el nombre del módulo para la ruta actual
+     * @return string|null
+     */
+    function nl2brV2($str)
+    {
+        return preg_replace('/\\\n|\n/', '<br>', htmlspecialchars($str));
+    }
+}

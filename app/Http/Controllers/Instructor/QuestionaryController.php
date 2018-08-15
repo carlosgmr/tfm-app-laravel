@@ -263,23 +263,15 @@ class QuestionaryController extends BaseController
             'questions' => 'required|json',
         ]);
 
-        $apiErrors = [];
-        $questions = json_decode($data['questions'], true);
-        if (count($questions) < 4) {
-            $apiErrors[] = 'Debes añadir mínimo 4 preguntas';
-        }
+        $service = new \App\Library\Api\QuestionaryService();
+        $serviceResponse = $service->addQuestions($id, '{"questions":'.$data['questions'].'}');
 
-        if (empty($apiErrors)) {
-        /*$service = new \App\Library\Api\QuestionaryService();
-        $serviceResponse = $service->update($id, $data);
-
-        if ($serviceResponse->isOk()) {*/
+        if ($serviceResponse->isOk()) {
             return redirect()->route($this->panel.'.'.$this->module.'.read', ['id' => $id])
                     ->with('flashMessage', 'Registro actualizado correctamente')
                     ->with('flashType', 'success');
-        /*} else {
+        } else {
             $apiErrors = $serviceResponse->getListErrors();
-        }*/
         }
 
         return redirect()->route($this->panel.'.'.$this->module.'.updateQuestionsView', ['id' => $id])
