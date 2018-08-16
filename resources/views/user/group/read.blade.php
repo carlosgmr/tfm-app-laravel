@@ -2,7 +2,7 @@
 @section('title', 'Detalle de grupo')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('user.group.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('user.group.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection
@@ -16,7 +16,7 @@
                         <h4 class="box-title">Datos</h4>
                     </div>
                     <div class="box-body">
-                        <dl>
+                        <dl class="dl-horizontal">
                             <dt>ID</dt>
                             <dd>{{ $item['id'] }}</dd>
                             <dt>Nombre</dt>

@@ -2,14 +2,14 @@
 @section('title', 'Detalle de instructor')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.instructor.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('administrator.instructor.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection
 
 @section('content')
     @if (!empty($item))
-        <dl>
+        <dl class="dl-horizontal">
             <dt>ID</dt>
             <dd>{{ $item['id'] }}</dd>
             <dt>Email</dt>
@@ -26,7 +26,7 @@
             <dd>{{ esDatetime($item['updated_at']) }}</dd>
             <dt>Activo</dt>
             <dd>{{ strBool($item['active']) }}</dd>
-            <dt>Grupos a los que pertenece</dt>
+            <dt>Grupos</dt>
             <dd>
                 @foreach ($groups as $group)
                     <a href="{{ route('administrator.group.read', ['id' => $group['id']]) }}">{{ $group['name'] }}</a><br/>

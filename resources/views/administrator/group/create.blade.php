@@ -2,7 +2,7 @@
 @section('title', 'Crear grupo')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.group.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('administrator.group.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection

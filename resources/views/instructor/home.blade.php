@@ -4,8 +4,7 @@
 @section('content')
     <p>Bienvenido al panel de instructor. Selecciona una opción:</p>
     <p>
-        <!--
-        <a href="" class="btn btn-default btn-block" style="text-align:left"></a>
-        -->
+        <a href="{{ route('instructor.group.listing') }}" class="btn btn-default btn-block" style="text-align:left">Grupos</a>
+        <a href="{{ route('instructor.questionary.listing') }}" class="btn btn-default btn-block" style="text-align:left">Exámenes/encuestas</a>
     </p>
 @endsection

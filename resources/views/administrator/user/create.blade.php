@@ -2,7 +2,7 @@
 @section('title', 'Crear usuario')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.user.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('administrator.user.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection

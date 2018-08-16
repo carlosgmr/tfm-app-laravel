@@ -2,7 +2,7 @@
 @section('title', 'Crear examen/encuesta')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('instructor.questionary.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('instructor.questionary.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection

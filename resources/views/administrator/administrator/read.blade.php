@@ -2,14 +2,14 @@
 @section('title', 'Detalle de administrador')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.administrator.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('administrator.administrator.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection
 
 @section('content')
     @if (!empty($item))
-        <dl>
+        <dl class="dl-horizontal">
             <dt>ID</dt>
             <dd>{{ $item['id'] }}</dd>
             <dt>Email</dt>

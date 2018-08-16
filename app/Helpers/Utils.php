@@ -83,10 +83,10 @@ if (!function_exists('urlHome')) {
             case 'administrator':
                 $route = route('administrator.home');
                 break;
-            case 'administrator':
+            case 'instructor':
                 $route = route('instructor.home');
                 break;
-            case 'administrator':
+            case 'user':
                 $route = route('user.home');
                 break;
             default:

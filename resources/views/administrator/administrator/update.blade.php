@@ -2,10 +2,10 @@
 @section('title', 'Modificar administrador')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.administrator.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('administrator.administrator.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a> 
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('administrator.administrator.read', ['id' => $id]) }}">
+<a class="btn btn-sm btn-primary" title="Volver a detalles" href="{{ route('administrator.administrator.read', ['id' => $id]) }}">
     <i class="fa fa-eye"></i> Volver a detalles
 </a>
 @endsection

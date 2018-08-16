@@ -2,7 +2,7 @@
 @section('title', 'Examen/encuesta')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('instructor.questionary.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('instructor.questionary.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
 @endsection
@@ -16,7 +16,7 @@
                 </div>
                 <div class="box-body">
                     @if (!empty($item))
-                        <dl>
+                        <dl class="dl-horizontal">
                             <dt>ID</dt>
                             <dd>{{ $item['id'] }}</dd>
                             <dt>Grupo</dt>

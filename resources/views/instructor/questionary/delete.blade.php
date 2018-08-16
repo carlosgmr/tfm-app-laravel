@@ -2,17 +2,17 @@
 @section('title', 'Eliminar examen/encuesta')
 
 @section('tools')
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('instructor.questionary.listing') }}">
+<a class="btn btn-sm btn-primary" title="Volver al listado" href="{{ route('instructor.questionary.listing') }}">
     <i class="fa fa-arrow-left"></i> Volver al listado
 </a>
-<a class="btn btn-sm btn-primary" title="Crear" href="{{ route('instructor.questionary.read', ['id' => $id]) }}">
+<a class="btn btn-sm btn-primary" title="Volver a detalles" href="{{ route('instructor.questionary.read', ['id' => $id]) }}">
     <i class="fa fa-eye"></i> Volver a detalles
 </a>
 @endsection
 
 @section('content')
     @if (!empty($item))
-        <dl>
+        <dl class="dl-horizontal">
             <dt>ID</dt>
             <dd>{{ $item['id'] }}</dd>
             @if (!empty($group))
