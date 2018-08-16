@@ -74,4 +74,33 @@ class UserService extends BaseService
 
         return new ServiceResponse($response);
     }
+
+    /**
+     * Obtiene el detalle de las respuesta registradas para un usuario y examen/encuestas concretos
+     * @param string|int $idUser
+     * @param string|int $idGroup
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function questionnairesByGroupAndState($idUser, $idGroup)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $response = $client->request('GET', $this->url.$this->resource.'/'.$idUser.'/group/'.$idGroup.'/questionary/by-state', $options);
+
+        return new ServiceResponse($response);
+    }
+
+    /**
+     * Obtiene el detalle de las respuesta registradas para un usuario y examen/encuestas concretos
+     * @param string|int $idUser
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function questionnairesByState($idUser)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $response = $client->request('GET', $this->url.$this->resource.'/'.$idUser.'/questionary/by-state', $options);
+
+        return new ServiceResponse($response);
+    }
 }

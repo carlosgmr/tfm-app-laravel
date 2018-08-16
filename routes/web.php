@@ -96,3 +96,15 @@ Route::post('/instructor/questionary/{id}/update/questions', 'Instructor\Questio
  * Panel usuario
  */
 Route::get('/user', 'User\HomeController@index')->name('user.home');
+
+Route::get('/user/group', 'User\GroupController@listing')->name('user.group.listing');
+Route::get('/user/group/{id}', 'User\GroupController@read')->name('user.group.read')->where('id', '[1-9][0-9]*');
+
+Route::get('/user/instructor/{id}', 'User\InstructorController@read')->name('user.instructor.read')->where('id', '[1-9][0-9]*');
+
+Route::get('/user/user/{id}', 'User\UserController@read')->name('user.user.read')->where('id', '[1-9][0-9]*');
+Route::get('/user/user/questionary/{id}', 'User\UserController@questionaryDetails')->name('user.user.questionaryDetails')->where('id', '[1-9][0-9]*');
+
+Route::get('/user/questionary', 'User\QuestionaryController@listing')->name('user.questionary.listing');
+Route::get('/user/questionary/{id}/do-attempt', 'User\QuestionaryController@doAttemptView')->name('user.questionary.doAttemptView')->where('id', '[1-9][0-9]*');
+Route::post('/user/questionary/{id}/do-attempt', 'User\QuestionaryController@doAttemptProcess')->name('user.questionary.doAttemptProcess')->where('id', '[1-9][0-9]*');

@@ -30,6 +30,20 @@ class QuestionaryService extends BaseService
     }
 
     /**
+     * Obtiene el detalle básico de un examen/encuesta
+     * @param string|int $id
+     * @return \App\Library\Api\ServiceResponse
+     */
+    public function readBasic($id)
+    {
+        $client = $this->createClient();
+        $options = $this->createOptions();
+        $response = $client->request('GET', $this->url.$this->resource.'/'.$id.'/basic', $options);
+
+        return new ServiceResponse($response);
+    }
+
+    /**
      * Añade un listado de preguntas y respuestas a un questionary
      * @param string|int $id
      * @param string|array $data

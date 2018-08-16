@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Detalle de instructor')
+@section('title', 'Detalle de usuario')
 
 @section('content')
     @if (!empty($item))
@@ -24,7 +24,7 @@
             <dd>
                 @foreach ($groups as $group)
                     @if (in_array($group['id'], $validGroups))
-                        <a href="{{ route('instructor.group.read', ['id' => $group['id']]) }}">{{ $group['name'] }}</a><br/>
+                        <a href="{{ route('user.group.read', ['id' => $group['id']]) }}">{{ $group['name'] }}</a><br/>
                     @endif
                 @endforeach
             </dd>
