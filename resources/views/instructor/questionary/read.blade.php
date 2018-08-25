@@ -36,7 +36,7 @@
                             <dt>Fecha actualización</dt>
                             <dd>{{ esDatetime($item['updated_at']) }}</dd>
                             <dt>Público</dt>
-                            <dd>{{ strBool($item['active']) }}</dd>
+                            <dd>{{ strBool($item['public']) }}</dd>
                             <dt>Activo</dt>
                             <dd>{{ strBool($item['active']) }}</dd>
                         </dl>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="box-body">
                     @if (empty($item['questions']))
-                        <a class="btn btn-success" href="{{ route('instructor.questionary.updateQuestionsView', ['id' => $id]) }}" title="Modificar">Añadir</a> 
+                        <a class="btn btn-success" href="{{ route('instructor.questionary.updateQuestionsView', ['id' => $id]) }}" title="Añadir">Añadir</a> 
                     @else
                         <ol>
                             @foreach ($item['questions'] as $question)
@@ -88,11 +88,15 @@
                     <h4 class="box-title">Usuarios que lo han realizado</h4>
                 </div>
                 <div class="box-body">
-                    @foreach ($item['users'] as $user)
-                        <a href="{{ route('instructor.user.questionaryDetails', ['idUser' => $user['id'], 'idQuestionary' => $id]) }}">
-                            {{ trim($user['name'].' '.$user['surname_1'].' '.$user['surname_2']) }}
-                        </a>
-                    @endforeach
+                    @if (count($item['users']) > 0)
+                        @foreach ($item['users'] as $user)
+                            <a href="{{ route('instructor.user.questionaryDetails', ['idUser' => $user['id'], 'idQuestionary' => $id]) }}">
+                                {{ trim($user['name'].' '.$user['surname_1'].' '.$user['surname_2']) }}
+                            </a>
+                        @endforeach
+                    @else
+                        <div>No existen datos</div>
+                    @endif
                 </div>
             </div>
         </div>

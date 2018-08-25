@@ -36,7 +36,7 @@
             <dt>Fecha actualización</dt>
             <dd>{{ esDatetime($item['updated_at']) }}</dd>
             <dt>Público</dt>
-            <dd>{{ strBool($item['active']) }}</dd>
+            <dd>{{ strBool($item['public']) }}</dd>
             <dt>Activo</dt>
             <dd>{{ strBool($item['active']) }}</dd>
         </dl>
