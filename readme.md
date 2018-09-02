@@ -12,7 +12,7 @@ Para instalar el proyecto hay que seguir los siguientes pasos:
 4. Abrir el archivo `.env` y completar las siguientes variables de configuración:
 
     - *APP_KEY*: cadena aleatoria que se utilizará para tareas de encriptación. Se recomienda que tenga una longitud mínima de 32 caracteres y que contega letras en mayúsculas y minúsculas y números.
-    - *API_URL*: URL donde está desplegada la [API Lumen](https://github.com/carlosgmr/tfm-api-lumen).
+    - *API_URL*: URL donde está desplegada la [API Lumen](https://github.com/carlosgmr/tfm-api-lumen). **Importante** Si API se encuentra en el mismo equipo, no utilizar `localhost` o `127.0.0.1`, sino la IP que tiene el equipo en la red local (utilizad ifconfig para averiguarla).
 
 5. Construir la imagen de Docker: `docker build -t carlosgmr/app-laravel .`
    Tener en cuenta que hay que estar dentro de la carpeta del proyecto.
